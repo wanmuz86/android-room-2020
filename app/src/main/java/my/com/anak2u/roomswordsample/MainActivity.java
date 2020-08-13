@@ -5,12 +5,20 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,5 +59,38 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
+
+        public List<Word> words = new ArrayList<>();
+        @NonNull
+        @Override
+        //onCreateViewHolder in the Adaptor
+        public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+            return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()), viewGroup);
+        }
+
+
+        @Override
+        public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+            holder.wordTextView.setText(words.get(position).getWord());
+            holder.sentenceTextView.setText(words.get(position).getSentence());
+        }
+
+        @Override
+        public int getItemCount() {
+            return words.size();
+        }
+
+        public class CustomViewHolder extends RecyclerView.ViewHolder {
+            private TextView wordTextView, sentenceTextView;
+            public CustomViewHolder(LayoutInflater inflater, ViewGroup parent) {
+                super(inflater.inflate(R.layout.custom_row, parent, false));
+                wordTextView = itemView.findViewById(R.id.wordTextView);
+                sentenceTextView = itemView.findViewById(R.id.defTextView);
+            }
+
+        }
     }
 }
