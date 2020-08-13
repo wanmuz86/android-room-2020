@@ -1,5 +1,6 @@
 package my.com.anak2u.roomswordsample;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,8 +35,16 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+               Intent intent = new Intent(MainActivity.this,
+                       AddActivity.class);
+
+               // This is required because we expect AddActivity
+                // to pass back the
+                // info entered on second page..
+                // Then we will save that info on the database...
+                // We create a subActivity in thi scenario
+               startActivityForResult(intent,1);
+
             }
         });
 
