@@ -24,5 +24,5 @@ public interface WordDao {
     public LiveData<Word> getWordById(Integer id);
 
     @Delete
-    public void deleteById(Integer id);
+    public void delete(Word word);
 }
